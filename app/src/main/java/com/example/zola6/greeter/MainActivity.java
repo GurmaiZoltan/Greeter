@@ -13,7 +13,7 @@ import com.example.zola6.greeter.m_MySQL.Downloader;
 
 public class MainActivity extends AppCompatActivity {
 
-    String url="http://tarhely.adatb.mik.uni-pannon.hu/~ncep2y/Greeter/session.php";
+    String url="http://greeter.hostei.com/android.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
