@@ -1,6 +1,8 @@
 package com.example.zola6.greeter.m_MySQL;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
@@ -57,6 +59,11 @@ class Parser extends AsyncTask<Void,Integer,Integer> {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Snackbar.make(view,players.get(position), Snackbar.LENGTH_SHORT).show();
+
+                    //ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    //ClipData clip = ClipData.newPlainText(label, text);
+                    //clipboard.setPrimaryClip(clip);
+
                 }
             });
         }else

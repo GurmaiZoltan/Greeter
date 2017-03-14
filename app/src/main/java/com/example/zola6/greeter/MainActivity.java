@@ -35,6 +35,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void buttonOnClick(View v){
+        String url="http://greeter.hostei.com/android_birthday.php";
+        final ListView lv= (ListView) findViewById(R.id.lv);
+        final Downloader d=new Downloader(this,url,lv);
+        d.execute();
+    }
+
+    public void button2OnClick(View v){
+        String url="http://greeter.hostei.com/android_nameday.php";
+        final ListView lv= (ListView) findViewById(R.id.lv);
+        final Downloader d=new Downloader(this,url,lv);
+        d.execute();
+    }
+
+    public void button3OnClick(View v){
+        String url="http://greeter.hostei.com/android_christmas.php";
+        final ListView lv= (ListView) findViewById(R.id.lv);
+        final Downloader d=new Downloader(this,url,lv);
+        d.execute();
+    }
+
+    public void button4OnClick(View v){
+        String url="http://greeter.hostei.com/android_newyear.php";
+        final ListView lv= (ListView) findViewById(R.id.lv);
+        final Downloader d=new Downloader(this,url,lv);
+        d.execute();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
