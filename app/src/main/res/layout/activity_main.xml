@@ -55,8 +55,8 @@
         android:id="@+id/include"
         layout="@layout/content_main"
         android:layout_width="385dp"
-        android:layout_height="557dp"
-        android:layout_marginTop="104dp"
+        android:layout_height="540dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
@@ -120,6 +120,27 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="-6dp" />
 
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="289dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="39dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:onClick="editTextOnClick"
+        android:text="Keresés cimkékre vagy szavakra"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@android:color/background_light"
+        android:textCursorDrawable="@android:color/background_light"
+        android:textSize="15sp"
+        android:nextFocusDown="@id/button"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/button5"
         style="@style/Widget.AppCompat.Button.Small"
@@ -135,23 +156,5 @@
         android:textSize="12sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="289dp"
-        android:layout_height="41dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Keresés cimkékre vagy szavakra"
-        android:textColor="@android:color/background_light"
-        android:textColorLink="@android:color/background_light"
-        android:textCursorDrawable="@android:color/background_light"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textSize="15sp"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="39dp" />
 
 </android.support.constraint.ConstraintLayout>
