@@ -14,14 +14,13 @@ import com.example.zola6.greeter.m_MySQL.Downloader;
 public class MainActivity extends AppCompatActivity {
 
     String url="http://greeter.hostei.com/android.php";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        
         final ListView lv= (ListView) findViewById(R.id.lv);
         final Downloader d=new Downloader(this,url,lv);
 
@@ -29,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //EXECUTE DOWNLOAD
-                d.execute();
+
             }
         });
     }
@@ -58,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void button4OnClick(View v){
         String url="http://greeter.hostei.com/android_newyear.php";
+        final ListView lv= (ListView) findViewById(R.id.lv);
+        final Downloader d=new Downloader(this,url,lv);
+        d.execute();
+    }
+
+    public void button5OnClick(View v){
+        String url="http://greeter.hostei.com/android.php";
         final ListView lv= (ListView) findViewById(R.id.lv);
         final Downloader d=new Downloader(this,url,lv);
         d.execute();

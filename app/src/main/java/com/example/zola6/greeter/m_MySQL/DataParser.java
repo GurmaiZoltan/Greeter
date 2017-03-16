@@ -1,7 +1,6 @@
 package com.example.zola6.greeter.m_MySQL;
 
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -12,17 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.zola6.greeter.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.content.Context.*;
+
 /**
  * Created by Zola6 on 2017. 02. 21..
  */
 
 class Parser extends AsyncTask<Void,Integer,Integer> {
+
     Context c;
     ListView lv;
     String data;
@@ -51,19 +55,19 @@ class Parser extends AsyncTask<Void,Integer,Integer> {
         if(integer == 1)
         {
             //ADAPTER
-            ArrayAdapter<String> adapter=new ArrayAdapter<String>(c,android.R.layout.simple_list_item_1,players);
+            ArrayAdapter<String> adapter=new ArrayAdapter<String>(c, R.layout.textcenter, R.id.textItem, players);
+
             //ADAPT TO LISTVIEW
             lv.setAdapter(adapter);
             //LISTENET
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Snackbar.make(view,players.get(position), Snackbar.LENGTH_SHORT).show();
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) { //Események a választott sms-re koppintva.
 
-                    //ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    //ClipData clip = ClipData.newPlainText(label, text);
-                    //clipboard.setPrimaryClip(clip);
+                    Snackbar.make(view,"Üzenet másolva a vágólapra.", Snackbar.LENGTH_LONG).show(); //Értesítés alul, hogy az üzenet a vágólapra került.
 
+                    ((ClipboardManager) c.getSystemService(CLIPBOARD_SERVICE)) //Üzenet vágólapra helyezése.
+                            .setText(players.get(position));
                 }
             });
         }else
