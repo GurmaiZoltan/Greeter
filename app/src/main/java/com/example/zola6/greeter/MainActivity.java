@@ -1,22 +1,35 @@
 package com.example.zola6.greeter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.zola6.greeter.m_MySQL.Downloader;
+import com.example.zola6.greeter.m_MySQL.SenderReceiver;
 
 import static com.example.zola6.greeter.R.id.editText;
 
 public class MainActivity extends AppCompatActivity {
 
     String url="http://greeter.hostei.com/android.php";
+    String urlAddress="http://greeter.hostei.com/android_searcher.php";
+    SearchView sv;
+    //ListView lv;
+    ImageView noDataImg,noNetworkImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final ListView lv= (ListView) findViewById(R.id.lv);
+        ListView lv= (ListView) findViewById(R.id.lv);
         final Downloader d=new Downloader(this,url,lv);
         d.execute();
 
@@ -36,6 +49,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //lv= (ListView) findViewById(R.id.lv);
+        sv= (SearchView) findViewById(R.id.sv);
+        noDataImg= (ImageView) findViewById(R.id.nodataImg);
+        noNetworkImg= (ImageView) findViewById(R.id.noserver);
+
+        final ListView finalLv = lv;
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+                sr.execute();
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String query) {
+                SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+                sr.execute();
+                return false;
+            }
+        });
+
     }
 
     public void buttonOnClick(View v){
@@ -76,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
     public void editTextOnClick(View v){
         EditText edt = (EditText)findViewById(R.id.editText);
         edt.setText("");
+        edt.clearFocus();
     }
 
     @Override

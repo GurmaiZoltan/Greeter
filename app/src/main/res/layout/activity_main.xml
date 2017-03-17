@@ -2,20 +2,25 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.example.zola6.greeter.MainActivity"
-    tools:layout_editor_absoluteY="25dp"
-    tools:layout_editor_absoluteX="0dp">
 
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.example.zola6.greeter.MainActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="25dp">
 
     <Button
         android:id="@+id/button"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="85dp"
-        android:layout_height="19dp"
+        android:layout_width="82dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:background="@android:color/white"
         android:onClick="buttonOnClick"
@@ -33,23 +38,22 @@
         android:background="@color/colorPrimaryDark"
         android:textAlignment="center"
         app:popupTheme="@style/AppTheme.PopupOverlay"
+        tools:layout_conversion_absoluteHeight="0dp"
+        tools:layout_conversion_absoluteWidth="368dp"
         tools:layout_conversion_absoluteX="8dp"
         tools:layout_conversion_absoluteY="48dp"
-        tools:layout_conversion_absoluteWidth="368dp"
-        tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_editor_absoluteY="48dp"
-        tools:layout_editor_absoluteX="8dp" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="48dp" />
 
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:visibility="invisible"
         app:srcCompat="@android:drawable/ic_dialog_email"
-        tools:layout_editor_absoluteY="519dp"
-        tools:layout_editor_absoluteX="336dp" />
+        tools:layout_editor_absoluteX="336dp"
+        tools:layout_editor_absoluteY="519dp" />
 
     <include
         android:id="@+id/include"
@@ -64,9 +68,10 @@
     <Button
         android:id="@+id/button2"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="59dp"
-        android:layout_height="19dp"
+        android:layout_width="57dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="80dp"
         android:background="@android:color/white"
         android:onClick="button2OnClick"
@@ -79,9 +84,10 @@
     <Button
         android:id="@+id/button3"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="74dp"
-        android:layout_height="19dp"
+        android:layout_width="73dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:background="@android:color/white"
         android:onClick="button3OnClick"
@@ -94,9 +100,10 @@
     <Button
         android:id="@+id/button4"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="43dp"
-        android:layout_height="19dp"
+        android:layout_width="45dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:background="@android:color/white"
         android:onClick="button4OnClick"
@@ -118,25 +125,32 @@
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="-6dp" />
+        tools:layout_editor_absoluteY="-4dp" />
+
+    <requestFocus
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="289dp"
         android:layout_height="41dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="130dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:ems="10"
         android:inputType="textPersonName"
+        android:nextFocusDown="@id/button"
         android:onClick="editTextOnClick"
         android:text="Keresés cimkékre vagy szavakra"
         android:textColor="@android:color/background_light"
         android:textColorLink="@android:color/background_light"
         android:textCursorDrawable="@android:color/background_light"
         android:textSize="15sp"
-        android:nextFocusDown="@id/button"
-        app:layout_constraintHorizontal_bias="0.084"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -145,7 +159,8 @@
         android:id="@+id/button5"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="80dp"
         android:background="@android:color/white"
@@ -156,5 +171,17 @@
         android:textSize="12sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/sv"
+        android:layout_width="365dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="48dp"
+        app:defaultQueryHint="Keresés szavakra..."
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="50dp"></android.support.v7.widget.SearchView>
 
 </android.support.constraint.ConstraintLayout>

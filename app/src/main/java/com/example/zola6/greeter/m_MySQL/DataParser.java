@@ -100,6 +100,7 @@ class Parser extends AsyncTask<Void,Integer,Integer> {
             //CREATE JO OBJ TO HOLD A SINGLE ITEM
             JSONObject jo=null;
             players.clear();
+
             //LOOP THRU ARRAY
             for(int i=0;i<ja.length();i++)
             {
