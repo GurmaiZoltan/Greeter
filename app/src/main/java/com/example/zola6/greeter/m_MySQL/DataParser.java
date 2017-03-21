@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -78,10 +79,9 @@ class Parser extends AsyncTask<Void,Integer,Integer> {
                     String message = players.get(position);
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, players.get(position));
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, message);
                     sendIntent.setType("text/plain");
                     view.getContext().startActivity(sendIntent);
-
                 }
             });
         }else

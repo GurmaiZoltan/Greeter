@@ -12,14 +12,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zola6.greeter.m_MySQL.Downloader;
 import com.example.zola6.greeter.m_MySQL.SenderReceiver;
 
+import static com.example.zola6.greeter.R.id.button;
 import static com.example.zola6.greeter.R.id.editText;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +41,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final ImageButton imgBtn = (ImageButton)findViewById(R.id.imageButton);
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Button btn = (Button)findViewById(R.id.button);
+                if (btn.getText()=="Születésnap") {
+                    btn.setText("Birthday");
+                    ImageButton flashButtonOn = (ImageButton) findViewById(R.id.imageButton);
+                    flashButtonOn.setImageResource(R.drawable.hu_flag);
+                }else{
+                    btn.setText("Születésnap");
+                    ImageButton flashButtonOn = (ImageButton) findViewById(R.id.imageButton);
+                    flashButtonOn.setImageResource(R.drawable.eng_flag);
+                }
+
+                Button btn2 = (Button)findViewById(R.id.button2);
+                if (btn2.getText()=="Névnap") {
+                    btn2.setText("Nameday");
+                }else{
+                    btn2.setText("Névnap");
+                }
+
+                Button btn3 = (Button)findViewById(R.id.button3);
+                if (btn3.getText()=="Karácsony") {
+                    btn3.setText("Christmas");
+                }else{
+                    btn3.setText("Karácsony");
+                }
+
+                Button btn4 = (Button)findViewById(R.id.button4);
+                if (btn4.getText()=="Újév") {
+                    btn4.setText("NewYear");
+                }else{
+                    btn4.setText("Újév");
+                }
+
+                Button btn5 = (Button)findViewById(R.id.button5);
+                if (btn5.getText()=="Össze") {
+                    btn5.setText("All");
+                }else{
+                    btn5.setText("Össze");
+                }
+            }
+        });
 
         ListView lv= (ListView) findViewById(R.id.lv);
         final Downloader d=new Downloader(this,url,lv);
@@ -66,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String query) {
                 SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
-                sr.execute();
+                //sr.execute();
                 return false;
             }
         });
