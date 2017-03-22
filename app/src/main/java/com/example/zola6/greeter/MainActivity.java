@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,19 +45,29 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Button btn = (Button)findViewById(R.id.button);
+        btn.setText("Születésnap");
+        Button btn2 = (Button)findViewById(R.id.button2);
+        btn2.setText("Névnap");
+        Button btn3 = (Button)findViewById(R.id.button3);
+        btn3.setText("Karácsony");
+        Button btn4 = (Button)findViewById(R.id.button4);
+        btn4.setText("Újév");
+        Button btn5 = (Button)findViewById(R.id.button5);
+        btn5.setText("Összes");
+
         final ImageButton imgBtn = (ImageButton)findViewById(R.id.imageButton);
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ImageButton flashButtonOn = (ImageButton) findViewById(R.id.imageButton);
+                flashButtonOn.setImageResource(R.drawable.hu_flag);
 
                 Button btn = (Button)findViewById(R.id.button);
-                if (btn.getText()=="Születésnap") {
+                if (btn.getText() == "Születésnap") {
                     btn.setText("Birthday");
-                    ImageButton flashButtonOn = (ImageButton) findViewById(R.id.imageButton);
-                    flashButtonOn.setImageResource(R.drawable.hu_flag);
                 }else{
                     btn.setText("Születésnap");
-                    ImageButton flashButtonOn = (ImageButton) findViewById(R.id.imageButton);
                     flashButtonOn.setImageResource(R.drawable.eng_flag);
                 }
 
@@ -80,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Button btn5 = (Button)findViewById(R.id.button5);
-                if (btn5.getText()=="Össze") {
+                if (btn5.getText()=="Összes") {
                     btn5.setText("All");
                 }else{
-                    btn5.setText("Össze");
+                    btn5.setText("Összes");
                 }
             }
         });
