@@ -138,10 +138,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonOnClick(View v){
-        String url="http://greeter.hostei.com/android_birthday.php";
-        final ListView lv= (ListView) findViewById(R.id.lv);
-        final Downloader d=new Downloader(this,url,lv);
-        d.execute();
+
+        Button btn = (Button)findViewById(R.id.button);
+        if (btn.getText() == "Birthday"){
+            ListView lv= (ListView) findViewById(R.id.lv);
+            final ListView finalLv = lv;
+            urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en'";
+            SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+            sr.execute();
+        }else {
+
+            String url = "http://greeter.hostei.com/android_birthday.php";
+            final ListView lv = (ListView) findViewById(R.id.lv);
+            final Downloader d = new Downloader(this, url, lv);
+            d.execute();
+        }
     }
 
     public void button2OnClick(View v){
