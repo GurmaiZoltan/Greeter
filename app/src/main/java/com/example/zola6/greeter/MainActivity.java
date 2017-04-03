@@ -28,15 +28,18 @@ import com.example.zola6.greeter.m_MySQL.Downloader;
 import com.example.zola6.greeter.m_MySQL.SenderReceiver;
 
 import static com.example.zola6.greeter.R.id.button;
-import static com.example.zola6.greeter.R.id.editText;
+
 
 public class MainActivity extends AppCompatActivity {
 
     String url="http://greeter.hostei.com/android.php";
     String urlAddress="http://greeter.hostei.com/android_searcher.php";
+
     SearchView sv;
     //ListView lv;
     ImageView noDataImg,noNetworkImg;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,17 @@ public class MainActivity extends AppCompatActivity {
         Button btn5 = (Button)findViewById(R.id.button5);
         btn5.setText("Összes");
 
+        ListView lv= (ListView) findViewById(R.id.lv);
+        /*final ListView finalLv = lv;
+        urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+        String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='hu'";
+        SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+        sr.execute();*/
+
+
+        final Downloader d = new Downloader(this, url, lv);
+        d.execute();
+
         final ImageButton imgBtn = (ImageButton)findViewById(R.id.imageButton);
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,68 +77,61 @@ public class MainActivity extends AppCompatActivity {
                 ImageButton flashButtonOn = (ImageButton) findViewById(R.id.imageButton);
                 flashButtonOn.setImageResource(R.drawable.hu_flag);
 
+                ListView lv= (ListView) findViewById(R.id.lv);
+                final ListView finalLv = lv;
+                urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+
                 Button btn = (Button)findViewById(R.id.button);
+                Button btn2 = (Button)findViewById(R.id.button2);
+                Button btn3 = (Button)findViewById(R.id.button3);
+                Button btn4 = (Button)findViewById(R.id.button4);
+                Button btn5 = (Button)findViewById(R.id.button5);
                 if (btn.getText() == "Születésnap") {
                     btn.setText("Birthday");
+                    btn2.setText("Nameday");
+                    btn3.setText("Christmas");
+                    btn4.setText("NewYear");
+                    btn5.setText("All");
+
+                    String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en'";
+                    SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+                    sr.execute();
+
                 }else{
                     btn.setText("Születésnap");
-                    flashButtonOn.setImageResource(R.drawable.eng_flag);
-                }
-
-                Button btn2 = (Button)findViewById(R.id.button2);
-                if (btn2.getText()=="Névnap") {
-                    btn2.setText("Nameday");
-                }else{
                     btn2.setText("Névnap");
-                }
-
-                Button btn3 = (Button)findViewById(R.id.button3);
-                if (btn3.getText()=="Karácsony") {
-                    btn3.setText("Christmas");
-                }else{
                     btn3.setText("Karácsony");
-                }
-
-                Button btn4 = (Button)findViewById(R.id.button4);
-                if (btn4.getText()=="Újév") {
-                    btn4.setText("NewYear");
-                }else{
                     btn4.setText("Újév");
-                }
-
-                Button btn5 = (Button)findViewById(R.id.button5);
-                if (btn5.getText()=="Összes") {
-                    btn5.setText("All");
-                }else{
                     btn5.setText("Összes");
+                    flashButtonOn.setImageResource(R.drawable.eng_flag);
+
+                    String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='hu'";
+                    SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+                    sr.execute();
                 }
             }
         });
-
-        ListView lv= (ListView) findViewById(R.id.lv);
-        final Downloader d=new Downloader(this,url,lv);
-        d.execute();
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 
-        //lv= (ListView) findViewById(R.id.lv);
         sv= (SearchView) findViewById(R.id.sv);
         noDataImg= (ImageView) findViewById(R.id.nodataImg);
         noNetworkImg= (ImageView) findViewById(R.id.noserver);
 
         final ListView finalLv = lv;
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
+                urlAddress="http://greeter.hostei.com/android_searcher.php";
                 SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
                 sr.execute();
+                sv.clearFocus();
                 return false;
             }
             @Override
@@ -144,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             ListView lv= (ListView) findViewById(R.id.lv);
             final ListView finalLv = lv;
             urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
-            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en'";
+            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en' AND sms_label='Birthday'";
             SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
             sr.execute();
         }else {
@@ -157,38 +164,91 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void button2OnClick(View v){
-        String url="http://greeter.hostei.com/android_nameday.php";
-        final ListView lv= (ListView) findViewById(R.id.lv);
-        final Downloader d=new Downloader(this,url,lv);
-        d.execute();
+
+        Button btn2 = (Button)findViewById(R.id.button2);
+        if (btn2.getText() == "Nameday"){
+            ListView lv= (ListView) findViewById(R.id.lv);
+            final ListView finalLv = lv;
+            urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en' AND sms_label='Nameday'";
+            SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+            sr.execute();
+        }else {
+            String url="http://greeter.hostei.com/android_nameday.php";
+            final ListView lv= (ListView) findViewById(R.id.lv);
+            final Downloader d=new Downloader(this,url,lv);
+            d.execute();
+        }
     }
 
     public void button3OnClick(View v){
-        String url="http://greeter.hostei.com/android_christmas.php";
-        final ListView lv= (ListView) findViewById(R.id.lv);
-        final Downloader d=new Downloader(this,url,lv);
-        d.execute();
+
+        Button btn3 = (Button)findViewById(R.id.button3);
+        if (btn3.getText() == "Christmas"){
+            ListView lv= (ListView) findViewById(R.id.lv);
+            final ListView finalLv = lv;
+            urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en' AND sms_label='Christmas'";
+            SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+            sr.execute();
+        }else {
+            String url="http://greeter.hostei.com/android_christmas.php";
+            final ListView lv= (ListView) findViewById(R.id.lv);
+            final Downloader d=new Downloader(this,url,lv);
+            d.execute();
+        }
     }
 
     public void button4OnClick(View v){
-        String url="http://greeter.hostei.com/android_newyear.php";
-        final ListView lv= (ListView) findViewById(R.id.lv);
-        final Downloader d=new Downloader(this,url,lv);
-        d.execute();
+
+        Button btn4 = (Button)findViewById(R.id.button4);
+        if (btn4.getText() == "NewYear"){
+            ListView lv= (ListView) findViewById(R.id.lv);
+            final ListView finalLv = lv;
+            urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en' AND sms_label='New_Year'";
+            SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+            sr.execute();
+        }else {
+            String url="http://greeter.hostei.com/android_newyear.php";
+            final ListView lv= (ListView) findViewById(R.id.lv);
+            final Downloader d=new Downloader(this,url,lv);
+            d.execute();
+        }
     }
 
     public void button5OnClick(View v){
-        String url="http://greeter.hostei.com/android.php";
-        final ListView lv= (ListView) findViewById(R.id.lv);
-        final Downloader d=new Downloader(this,url,lv);
-        d.execute();
+
+        Button btn5 = (Button)findViewById(R.id.button5);
+        if (btn5.getText() == "All"){
+            ListView lv= (ListView) findViewById(R.id.lv);
+            final ListView finalLv = lv;
+            urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
+            String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='en'";
+            SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
+            sr.execute();
+        }else {
+            String url="http://greeter.hostei.com/android.php";
+            final ListView lv= (ListView) findViewById(R.id.lv);
+            final Downloader d=new Downloader(this,url,lv);
+            d.execute();
+        }
     }
 
-    public void editTextOnClick(View v){
+    public void button6OnClick(View v){
+        EditText edt = (EditText)findViewById(R.id.editText);
+        if(edt.getVisibility() == View.INVISIBLE){
+            edt.setVisibility(View.VISIBLE);
+        }else{
+            edt.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /*public void editTextOnClick(View v){
         EditText edt = (EditText)findViewById(R.id.editText);
         edt.setText("");
         edt.clearFocus();
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
