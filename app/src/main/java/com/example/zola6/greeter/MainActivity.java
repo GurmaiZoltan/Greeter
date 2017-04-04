@@ -3,6 +3,7 @@ package com.example.zola6.greeter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zola6.greeter.m_MySQL.Downloader;
+import com.example.zola6.greeter.m_MySQL.Sender;
 import com.example.zola6.greeter.m_MySQL.SenderReceiver;
 
 import static com.example.zola6.greeter.R.id.button;
@@ -237,18 +239,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void button6OnClick(View v){
         EditText edt = (EditText)findViewById(R.id.editText);
+        Button btn7 = (Button)findViewById(R.id.button7);
         if(edt.getVisibility() == View.INVISIBLE){
             edt.setVisibility(View.VISIBLE);
+            btn7.setVisibility(View.VISIBLE);
         }else{
             edt.setVisibility(View.INVISIBLE);
+            btn7.setVisibility(View.INVISIBLE);
         }
     }
 
-    /*public void editTextOnClick(View v){
-        EditText edt = (EditText)findViewById(R.id.editText);
-        edt.setText("");
-        edt.clearFocus();
-    }*/
+
+    public void button7OnClick(View v){
+
+        urlAddress="http://greeter.hostei.com/poster.php";
+        EditText nameTxt = (EditText)findViewById(R.id.editText);
+
+        Sender s=new Sender(MainActivity.this,urlAddress,nameTxt);
+        s.execute();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

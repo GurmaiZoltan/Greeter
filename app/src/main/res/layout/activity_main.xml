@@ -194,9 +194,14 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="180dp"
-        android:layout_height="128dp"
+
+
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="20"
+
         android:ems="10"
-        android:inputType="textPersonName"
+
         android:text="Name"
         android:background="@color/silver"
         android:visibility="invisible"
@@ -204,5 +209,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="66dp" />
+
+    <Button
+        android:id="@+id/button7"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="82dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginRight="68dp"
+        android:onClick="button7OnClick"
+        android:text="Beküldés"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
