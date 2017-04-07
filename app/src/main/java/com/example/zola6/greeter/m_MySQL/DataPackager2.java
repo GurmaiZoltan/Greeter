@@ -8,17 +8,17 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 /**
- * Created by Zola6 on 2017. 03. 16..
+ * Created by Zola6 on 2017. 04. 07..
  */
 
-public class DataPackager {
-    String query;
-    //String name, position;
-    public DataPackager(String query) {
+public class DataPackager2 {
 
-        this.query = query;
-        //this.name = name;
-        //this.position = position;
+    String name, position;
+    public DataPackager2(String name, String position) {
+
+        //this.query = query;
+        this.name = name;
+        this.position = position;
     }
     public String packageData()
     {
@@ -27,8 +27,8 @@ public class DataPackager {
         try
         {
             //jo.put("Query",query);
-            jo.put("Query",query);
-            //jo.put("Position",position);
+            jo.put("Name",name);
+            jo.put("Position",position);
             Boolean firstValue=true;
             Iterator it=jo.keys();
             do {

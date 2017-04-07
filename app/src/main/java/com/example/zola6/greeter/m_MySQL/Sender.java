@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,6 +25,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
     String urlAddress;
     //EditText nameTxt,posTxt,teamTxt;
     EditText nameTxt;
+    //String sms_label;
 
     String name,pos,team;
 
@@ -33,18 +35,21 @@ public class Sender extends AsyncTask<Void,Void,String> {
             1.OUR CONSTRUCTOR
     2.RECEIVE CONTEXT,URL ADDRESS AND EDITTEXTS FROM OUR MAINACTIVITY
     */
-    public Sender(Context c, String urlAddress,EditText...editTexts) {
+    public Sender(Context c, String urlAddress, String label, EditText...editTexts) {
         this.c = c;
         this.urlAddress = urlAddress;
+        //this.sms_label=label;
+        this.pos = label;
 
         //INPUT EDITTEXTS
         this.nameTxt=editTexts[0];
         //this.posTxt=editTexts[1];
         //this.teamTxt=editTexts[2];
 
+
         //GET TEXTS FROM EDITEXTS
         name=nameTxt.getText().toString();
-        //pos=posTxt.getText().toString();
+        //pos=label;
         //team=teamTxt.getText().toString();
 
     }
@@ -119,7 +124,8 @@ public class Sender extends AsyncTask<Void,Void,String> {
             //WRITE
             BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
             //bw.write(new DataPackager(name,pos,team).packData());
-            bw.write(new DataPackager(name).packageData());
+            //bw.write(new DataPackager(name).packageData());
+            bw.write(new DataPackager2(name,pos).packageData());
 
 
             bw.flush();

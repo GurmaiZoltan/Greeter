@@ -1,47 +1,33 @@
 package com.example.zola6.greeter;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.RemoteViews;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.example.zola6.greeter.m_MySQL.Downloader;
 import com.example.zola6.greeter.m_MySQL.Sender;
 import com.example.zola6.greeter.m_MySQL.SenderReceiver;
 
-import static com.example.zola6.greeter.R.id.button;
-
-
 public class MainActivity extends AppCompatActivity {
 
     String url="http://greeter.hostei.com/android.php";
     String urlAddress="http://greeter.hostei.com/android_searcher.php";
+    String sms_label = "Birthday";
 
     SearchView sv;
-    //ListView lv;
     ImageView noDataImg,noNetworkImg;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +48,18 @@ public class MainActivity extends AppCompatActivity {
         btn5.setText("Összes");
 
         ListView lv= (ListView) findViewById(R.id.lv);
-        /*final ListView finalLv = lv;
-        urlAddress="http://greeter.hostei.com/android_sql_teszt.php";
-        String query = "SELECT * FROM Message WHERE approved = 1 AND sms_language='hu'";
-        SenderReceiver sr=new SenderReceiver(MainActivity.this,urlAddress,query, finalLv,noDataImg,noNetworkImg);
-        sr.execute();*/
 
+        Spinner spin = (Spinner)findViewById(R.id.spin);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sms_label = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         final Downloader d = new Downloader(this, url, lv);
         d.execute();
@@ -240,12 +232,15 @@ public class MainActivity extends AppCompatActivity {
     public void button6OnClick(View v){
         EditText edt = (EditText)findViewById(R.id.editText);
         Button btn7 = (Button)findViewById(R.id.button7);
+        Spinner spin = (Spinner)findViewById(R.id.spin);
         if(edt.getVisibility() == View.INVISIBLE){
             edt.setVisibility(View.VISIBLE);
             btn7.setVisibility(View.VISIBLE);
+            spin.setVisibility(View.VISIBLE);
         }else{
             edt.setVisibility(View.INVISIBLE);
             btn7.setVisibility(View.INVISIBLE);
+            spin.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -254,9 +249,33 @@ public class MainActivity extends AppCompatActivity {
 
         urlAddress="http://greeter.hostei.com/poster.php";
         EditText nameTxt = (EditText)findViewById(R.id.editText);
+        Spinner spin = (Spinner)findViewById(R.id.spin);
 
-        Sender s=new Sender(MainActivity.this,urlAddress,nameTxt);
+        if (sms_label.equals("Születésnap")){
+            sms_label = "Birthday";
+        }
+
+        if (sms_label.equals("Névnap")){
+            sms_label = "Nameday";
+        }
+        if (sms_label.equals("Karácsony")){
+            sms_label = "Christmas";
+        }
+        if (sms_label.equals("Újév")){
+            sms_label = "New_Year";
+        }
+
+        Sender s=new Sender(MainActivity.this,urlAddress,sms_label, nameTxt);
         s.execute();
+    }
+
+    int editclick = 0;
+    public void editTextOnClick(View v){
+        if (editclick == 0){
+            EditText nameTxt = (EditText)findViewById(R.id.editText);
+            nameTxt.setText("");
+            editclick++;
+        }
     }
 
 
