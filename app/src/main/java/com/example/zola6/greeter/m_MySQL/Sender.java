@@ -61,6 +61,7 @@ public class Sender extends AsyncTask<Void,Void,String> {
         super.onPreExecute();
 
         pd=new ProgressDialog(c);
+
         pd.setTitle("Send");
         pd.setMessage("Sending..Please wait");
         pd.show();

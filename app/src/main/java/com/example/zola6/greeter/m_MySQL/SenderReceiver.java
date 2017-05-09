@@ -4,8 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.example.zola6.greeter.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,6 +42,7 @@ public class SenderReceiver extends AsyncTask<Void,Void,String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd=new ProgressDialog(c);
+
         pd.setTitle("Search");
         pd.setMessage("Searching...Please wait");
         pd.show();

@@ -22,11 +22,16 @@ import java.net.URL;
 public class Downloader extends AsyncTask<Void,Integer,String> {
     Context c;
     String address;
+    String lang;
     ListView lv;
     ProgressDialog pd;
-    public Downloader(Context c, String address, ListView lv) {
+
+    public Downloader(Context c, String address, ListView lv, String lang) {
         this.c = c;
         this.address = address;
+
+        this.lang = lang;
+
         this.lv = lv;
     }
     //B4 JOB STARTS
@@ -34,8 +39,13 @@ public class Downloader extends AsyncTask<Void,Integer,String> {
     protected void onPreExecute() {
         super.onPreExecute();
         pd=new ProgressDialog(c);
-        pd.setTitle("Fetch Data");
-        pd.setMessage("Fetching Data...Please wait");
+        if (lang.equals("hu")){
+            pd.setTitle("Adat Lekérés");
+            pd.setMessage("Adatok Lekérése...Kérem várjon");
+        }else{
+            pd.setTitle("Fetch Data");
+            pd.setMessage("Fetching Data...Please wait");
+        }
         pd.show();
     }
     @Override

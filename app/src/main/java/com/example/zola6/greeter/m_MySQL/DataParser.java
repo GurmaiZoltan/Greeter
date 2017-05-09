@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ class Parser extends AsyncTask<Void,Integer,Integer> {
         super.onPreExecute();
         pd=new ProgressDialog(c);
         pd.setTitle("Parser");
+
         pd.setMessage("Parsing ....Please wait");
         pd.show();
     }
@@ -72,9 +74,6 @@ class Parser extends AsyncTask<Void,Integer,Integer> {
                     ClipboardManager clipboard = (ClipboardManager) c.getSystemService(CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("label", players.get(position));
                     clipboard.setPrimaryClip(clip);
-
-                    //((ClipboardManager) c.getSystemService(CLIPBOARD_SERVICE)) //Üzenet vágólapra helyezése.
-                    //        .setText(players.get(position));
 
                     String message = players.get(position);
                     Intent sendIntent = new Intent();
